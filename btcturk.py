@@ -9,7 +9,7 @@ class Module(EasyI3StatusModule):
 		resp = get('https://btcturk.com/api/ticker')
 
 		if resp.status_code == 200:
-			jsonobj = resp.json()
+			jsonobj = [x for x in resp.json() if x["pair"] == "BTCTRY"][0]
 			self.values[0]['full_text'] = u'B⃦/₺ ' + str(jsonobj['average'])
 
 		self.isBusy = False
